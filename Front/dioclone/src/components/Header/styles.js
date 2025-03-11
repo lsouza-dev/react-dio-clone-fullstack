@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  height:50px;
+  height:60px;
   display: flex;
   flex-direction:row;
   padding: 0 4rem;
@@ -11,7 +11,6 @@ export const Container = styled.div`
 `
 
 export const ImageContainer = styled.div`
-  width:100px;
   display:flex;
   justify-content:center;
   align-items:center;
@@ -43,16 +42,16 @@ export const InputText = styled.input`
   border:0;
 `
 
-export const MenuImage = styled.img`
-  width:60%
-`
-
 export const MenuLeftContainer = styled.div`
-  width:350;
+  width:100px;
   display:flex;
   flex-direction:row;
   align-items:center;
   justify-content:center;
+
+  img{
+    height:25px;
+  }
 `
 
 export const MenuLeftText = styled.p`
@@ -71,3 +70,14 @@ export const MenuRightContainer = styled.div`
   gap: 1rem;
 `
 
+
+export const ProfileContainer = styled.div`
+  width:60px;
+  height:60px;
+`
+
+export const ProfileImage = styled.img`
+  border-radius:50%;
+  height:90%;
+  border: 1px solid #FFFFFF;
+`

@@ -1,58 +1,56 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
-export const Container = styled.div`
-  height:50px;
-  display: flex;
-  flex-direction:row;
-  padding: 0 4rem;
-  justify-content:space-between;
+export const Main  = styled.main`
+  border:1px solid red;
+  height:calc(100vh - 60px);
+  display: grid;
+  grid-template-columns:1fr 1fr;
   align-items:center;
-  background-color: #151515;
+  margin:0 5rem;
 `
 
-export const ImageContainer = styled.div`
-  width:100px;
+export const TextContainer = styled.div`
+  height: 70%;
+  width:70%;
+  border: 1px solid green;
+  font-size:2.7rem;
+  font-weight:700;
   display:flex;
-  justify-content:center;
-  align-items:center;
-`
-
-export const InputContainer = styled.div`
-  height:35px;
-  width:250px;
-  border-radius:.5rem;
-  background-color:#2D2D37;
-`
-
-export const InputIcon = styled.img`
-  
-`
-
-export const MenuImage = styled.img`
-  width:60%
-`
-
-export const MenuLeftContainer = styled.div`
-  width:350;
-  display:flex;
-  flex-direction:row;
-  align-items:center;
-  justify-content:center;
-`
-
-export const MenuLeftText = styled.p`
-  font-size:1rem;
-  font-weight:500;
-  margin: 0 .5rem;
-`
-
-export const MenuRightContainer = styled.div`
-  height:100%;
-  width:25%;
-  display: flex;
-  flex-direction:row;
-  justify-content:center;
-  align-items:center;
+  flex-direction:column;
+  justify-content:flex-start;
+  align-items:flex-start;
   gap: 1rem;
+
+  p{
+    font-size:1.3rem;
+    font-weight:400;
+  }
 `
 
+export const TextHighlight = styled.h3`
+  color:#E4105D;
+  // margin-bottom:1rem;
+`
+
+export const Text = styled.h3`
+ margin-bottom:1rem;
+`
+
+
+export const ButtonContainer = styled.div`
+  width:50%;
+  border:1px solid red;
+  height:40px;
+  display:flex;
+  flex-direction:row;
+  justify-content:center;
+  align-items:center;
+  margin-top:4.5rem;
+`
+
+
+export const BannerContainer = styled.div`
+  border: 1px solid green;
+  height: 70%;
+  display:flex;
+`

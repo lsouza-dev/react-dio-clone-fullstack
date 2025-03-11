@@ -1,9 +1,10 @@
 import React from 'react'
 import { ButonComponent } from './styles'
 
-const Button = ({text,btnpageactivated=false}) => {
+const Button = ({text,btnpageactivated=false,variant='secondary'}) => {
   return (
-    <ButonComponent  btnpageactivated={btnpageactivated}>
+    <ButonComponent variant={variant}
+      btnpageactivated={btnpageactivated}>
       {text}
     </ButonComponent>
   )
