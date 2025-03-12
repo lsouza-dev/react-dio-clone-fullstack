@@ -3,11 +3,18 @@ import Header from "../../components/Header";
 import Button from "../../components/Button";
 import Banner from '../../assets/banner.svg'
 import { Main, Text, TextContainer, ButtonContainer, BannerContainer,TextHighlight } from "./styles";
-
+import {useNavigate} from 'react-router-dom'
 const Home = () => {
+
+  const navigate = useNavigate();
+
+  const HandleNavigate = (path) =>{
+    navigate(`/${path}`);
+  }
+
   return (
     <>
-      <Header />
+      <Header  />
       <Main>
         <TextContainer>
           <TextHighlight>Implemente</TextHighlight>
@@ -18,7 +25,7 @@ const Home = () => {
             comunidade com os melhores experts.
           </p>
           <ButtonContainer>
-            <Button text={'Começar agora'} variant="primary"  btnpageactivated={false}/>
+            <Button text={'Começar agora'} variant="primary"  btnpageactivated={'false'} onClick={() => HandleNavigate('register')} />
           </ButtonContainer>
         </TextContainer>
         <BannerContainer>

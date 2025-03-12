@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Header from "../../components/Header";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
@@ -13,40 +13,43 @@ import {
   ActionContainer,
   FieldsContainer,
 } from "./styles";
-import { MdEmail, MdLock } from "react-icons/md";
+import { MdEmail, MdLock, MdPassword, MdPerson } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { api } from "../../service/userApiService";
-import { useState,useEffect } from "react";
 
 const Home = () => {
-
-  const [usuario, setUsuario] = useState(null)
-
   const navigate = useNavigate();
   const handleNavigate = (path) => {
     navigate(`/${path}`);
   };
 
+  const [createdUser,SetCreatedUser] = useState(false);
+
   const schema = yup
     .object({
+      nome: yup
+        .string()
+        .min(5, "Nome muito curto")
+        .required("Nome é obrigatório"),
       email: yup
         .string()
-        .email("Digite um email válido.")
-        .required("O email é obrigatório"),
+        .email("Digite um email válido")
+        .required("Email é obrigatório"),
       senha: yup
         .string()
         .min(5, "A senha deve ter no mínimo 5 caraceters")
-        .required("A senha é obrigatória"),
+        .required("Senha é obrigatória"),
     })
     .required();
 
+
   const {
     control,
-    handleSubmit,
     formState: { errors },
+    handleSubmit,
   } = useForm({
     resolver: yupResolver(schema),
     mode: "onBlur",
@@ -54,20 +57,22 @@ const Home = () => {
 
   const onSubmit = async (formData) => {
     let msg = '';
+
     try {
         const response = await api.post(
-            `login?Email=${encodeURIComponent(formData.email)}&Senha=${encodeURIComponent(formData.senha)}`
+            `create?Nome=${encodeURIComponent(formData.nome)}&Email=${encodeURIComponent(formData.email)}&Senha=${encodeURIComponent(formData.senha)}`
         );
-        console.log("Resposta da API:", response.data);
-        msg = response.data.mensagem;
-        setUsuario(response.data.usuario);
 
+        console.log("Resposta da API:", response.data);
+        SetCreatedUser(true);
+        msg = response.data.mensagem;
     } catch (error) {
         console.error("Erro na requisição:", error);
+
         try {
-            // Tenta converter a resposta de erro para JSON e pegar a mensagem
+            // Converte a resposta de erro para JSON e captura as mensagens
             const errorResponse = JSON.parse(error.request.response);
-            msg = errorResponse.mensagem || "Erro desconhecido";
+            msg = Object.values(errorResponse).flat().join("\n"); // Junta todas as mensagens em uma string
         } catch {
             msg = "Erro ao processar resposta do servidor";
         }
@@ -76,10 +81,10 @@ const Home = () => {
     }
 };
 
-  const login = useEffect(() =>{
-    if(usuario) handleNavigate('feed')
-  },[usuario,handleNavigate]);
-      
+
+const redirect = useEffect(()=>{
+  if(createdUser) handleNavigate('login')
+},[createdUser,handleNavigate]);
 
 
   return (
@@ -93,44 +98,52 @@ const Home = () => {
           </Text>
         </TextContainer>
         <FormContainer onSubmit={handleSubmit(onSubmit)}>
-          <FormTitle>Faça seu Login</FormTitle>
-          <FormSubtitle>Faça seu login e make the change._</FormSubtitle>
+          <FormTitle>Comece agora grátis</FormTitle>
+          <FormSubtitle>Crie sua conta e make the change._</FormSubtitle>
           <FieldsContainer>
             <Input
-              name={"email"}
+              InputIcon={MdPerson}
+              name={"nome"}
               control={control}
-              InputIcon={MdEmail}
-              placeholder={"E-mail"}
-              errorMessage={errors.email?.message}
+              type={"text"}
+              errorMessage={errors.nome?.message}
+              placeholder={"Nome Completo"}
             />
             <Input
-              name={"senha"}
+              InputIcon={MdEmail}
+              name={"email"}
               control={control}
-              InputIcon={MdLock}
-              placeholder={"Senha"}
-              type={"password"}
-              errorMessage={errors.senha?.message}
-            />
+              type={"email"}
+              errorMessage={errors.email?.message}
+              placeholder={"E-mail"}
+            /><Input
+            InputIcon={MdLock}
+            name={"senha"}
+            control={control}
+            type={"password"}
+            errorMessage={errors.senha?.message}
+            placeholder={"Senha"}
+          />
           </FieldsContainer>
           <ButtonContainer>
             <Button
-              text={"Entrar"}
-              type="submit"
+              text={"Criar minha conta"}
               variant="primary"
-              btnpageactivated={"false"}
+              btnpageactivated={'false'}
+              type={'submit'}
             />
           </ButtonContainer>
+          <FormSubtitle>
+            Ao clicar em "criar minha conta grátis", declaro que aceito as
+            Políticas de Privacidade e os Termos de Uso da DIO.
+          </FormSubtitle>
           <ActionContainer>
-            <a href onClick={() => handleNavigate("login")} className="esqueci">
-              Esqueci minha senha
-            </a>
-            <a
-              href
-              onClick={() => handleNavigate("register")}
-              className="criar"
-            >
-              Criar conta
-            </a>
+            <span>
+              Já tenho conta.{" "}
+              <a href onClick={() => handleNavigate("login")} className="login">
+                Fazer login
+              </a>
+            </span>
           </ActionContainer>
         </FormContainer>
       </Main>

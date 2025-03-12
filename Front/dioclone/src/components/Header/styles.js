@@ -8,12 +8,17 @@ export const Container = styled.div`
   justify-content:space-between;
   align-items:center;
   background-color: #151515;
+
+  a{
+  cursor:pointer;
+  }
 `
 
 export const ImageContainer = styled.div`
   display:flex;
   justify-content:center;
   align-items:center;
+  margin-left:1rem;
 `
 
 export const InputContainer = styled.div`
@@ -43,11 +48,12 @@ export const InputText = styled.input`
 `
 
 export const MenuLeftContainer = styled.div`
-  width:100px;
+  // width:100px;
   display:flex;
   flex-direction:row;
   align-items:center;
   justify-content:center;
+  gap:1rem;
 
   img{
     height:25px;

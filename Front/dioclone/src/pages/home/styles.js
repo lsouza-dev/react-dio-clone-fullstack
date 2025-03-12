@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 export const Main  = styled.main`
-  border:1px solid red;
   height:calc(100vh - 60px);
   display: grid;
   grid-template-columns:1fr 1fr;
@@ -11,8 +10,7 @@ export const Main  = styled.main`
 
 export const TextContainer = styled.div`
   height: 70%;
-  width:70%;
-  border: 1px solid green;
+  width:60%;
   font-size:2.7rem;
   font-weight:700;
   display:flex;
@@ -39,7 +37,6 @@ export const Text = styled.h3`
 
 export const ButtonContainer = styled.div`
   width:50%;
-  border:1px solid red;
   height:40px;
   display:flex;
   flex-direction:row;
@@ -50,7 +47,6 @@ export const ButtonContainer = styled.div`
 
 
 export const BannerContainer = styled.div`
-  border: 1px solid green;
   height: 70%;
   display:flex;
 `

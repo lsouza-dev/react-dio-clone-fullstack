@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 export const ButonComponent = styled.button`
   ${({ variant, btnpageactivated }) =>
     variant === "primary" &&
-    btnpageactivated === false &&
+    btnpageactivated === 'false' &&
     css`
       min-width: 167px;
 
@@ -46,18 +46,21 @@ export const ButonComponent = styled.button`
 
 
   ${({ btnpageactivated, variant }) =>
-    btnpageactivated === true &&
+    btnpageactivated === 'true' &&
     variant !== "primary" &&
     css`
       background-color: transparent;
     `}
 
   ${({ btnpageactivated, variant }) =>
-    btnpageactivated !== true &&
+    btnpageactivated !== 'true' &&
     variant !== "primary" &&
     css`
       &:hover {
         opacity: 0.6;
       }
     `}
+
+    &:hover{
+    cursor:pointer}
 `;
